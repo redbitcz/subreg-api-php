@@ -1,19 +1,21 @@
 {
   "name": "soukicz/subreg-api",
-  "description": "Subreg.cz",
-  "minimum-stability": "stable",
-  "license": "MIT",
+  "description": "PHP client for working with Subreg.cz API",
+  "license": ["MIT"],
   "authors": [
     {
       "name": "Petr Soukup",
       "email": "soukup@simplia.cz"
+    },
+    {
+      "name": "Jakub Bouček",
+      "email": "pan@jakubboucek.cz"
     }
   ],
   "require": {
-    "php": ">=7.3.0",
-    "ext-soap": "*"
-  },
-  "require-dev": {
+    "php": ">=7.3",
+    "ext-soap": "*",
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {
