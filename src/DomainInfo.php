@@ -1,13 +1,17 @@
 <?php
+
 namespace Soukicz\SubregApi;
 
-class DomainInfo {
+use DateTime;
+
+class DomainInfo
+{
     /**
      * @var string
      */
     protected $name;
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     protected $expiration;
 
@@ -15,16 +19,18 @@ class DomainInfo {
      * @param string $name
      * @return DomainInfo
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
         return $this;
     }
 
     /**
-     * @param \DateTime $expiration
+     * @param DateTime $expiration
      * @return DomainInfo
      */
-    public function setExpiration(\DateTime $expiration) {
+    public function setExpiration(DateTime $expiration)
+    {
         $this->expiration = $expiration;
         return $this;
     }
@@ -32,14 +38,16 @@ class DomainInfo {
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getExpiration() {
+    public function getExpiration()
+    {
         return $this->expiration;
     }
 

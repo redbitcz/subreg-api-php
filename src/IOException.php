@@ -1,5 +1,9 @@
 <?php
+
 namespace Soukicz\SubregApi;
 
-class IOException extends \RuntimeException {
+use RuntimeException;
+
+class IOException extends RuntimeException
+{
 }
