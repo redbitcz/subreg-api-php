@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Soukicz\SubregApi;
 
 use Closure;
-use DateTime;
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\NullLogger;
 use SoapClient;
 use SoapFault;
 use Soukicz\SubregApi\Exception\AccessDeniedException;
@@ -25,6 +26,8 @@ use Soukicz\SubregApi\TokenCache\MemoryCache;
 
 class Client
 {
+    use LoggerAwareTrait;
+
     /** @var SoapClient|null */
     private $client;
     /** @var Credentials */
@@ -36,11 +39,14 @@ class Client
     {
         $this->credentials = $credentials;
         $this->tokenCache = $tokenCache ?? new MemoryCache();
+        $this->setLogger(new NullLogger());
     }
 
     public function call(string $command, array $data = []): Response
     {
-        return $this->processCall($command, $data, $this->getApiToken());
+        $apiToken = $this->getApiToken();
+        $this->logger->debug(__CLASS__ . ' ' . $command,  $data);
+        return $this->processCall($command, $data, $apiToken);
     }
 
     private function getApiToken(): string
@@ -54,6 +60,7 @@ class Client
             'login' => $this->credentials->getLogin(),
             'password' => $this->credentials->getPassword(),
         ];
+        $this->logger->debug(__CLASS__ . ' Login', ['password' => '**REDACTED**'] + $credentialsData);
         $response = $this->processCall('Login', $credentialsData);
 
         if ($response->hasField('ssid') === false) {
