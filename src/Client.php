@@ -145,7 +145,7 @@ class Client
 
             '501:1001' => InvalidArgumentException::class,
             '501:1003' => InvalidArgumentException::class,
-            '501:1004' => NotFoundException::class,
+            '501:1004' => AccessDeniedException::class,
             '501:1005' => InvalidArgumentException::class,
 
             '503:1001' => InvalidArgumentException::class,

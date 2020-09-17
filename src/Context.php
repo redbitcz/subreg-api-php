@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Soukicz\SubregApi;
 
 use Soukicz\SubregApi\Iterator\Domains;
+use Soukicz\SubregApi\Repository\DomainRepository;
 
 class Context
 {
@@ -21,9 +22,9 @@ class Context
         return $this->client;
     }
 
-    public function getDomainList(): Domains
+    public function domains(): DomainRepository
     {
-        $response = $this->client->call('Domains_List');
-        return new Domains($response->getMandatoryField('domains'), $this);
+        return new DomainRepository($this);
     }
+
 }
