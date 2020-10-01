@@ -34,7 +34,7 @@ trait SchemaObject
         return Helpers::toArray($this->data);
     }
 
-    protected function getItem(string $key)
+    public function getItem(string $key)
     {
         try {
             return $this->getMandatoryItem($key);
@@ -43,7 +43,7 @@ trait SchemaObject
         }
     }
 
-    protected function getMandatoryItem(string $key)
+    public function getMandatoryItem(string $key)
     {
         return $this->getItemRecursive(explode(self::$STRUCTURE_KEY_DELIMITER, $key), $this->data);
     }

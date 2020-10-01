@@ -6,6 +6,7 @@ namespace Soukicz\SubregApi\Repository;
 
 use Soukicz\SubregApi\Context;
 use Soukicz\SubregApi\Entity\DomainCheck;
+use Soukicz\SubregApi\Entity\DomainInfo;
 use Soukicz\SubregApi\Iterator\Domains;
 
 class DomainRepository
@@ -28,5 +29,11 @@ class DomainRepository
     {
         $response = $this->context->getClient()->call('Domains_List');
         return Domains::fromResponse($response, $this->context);
+    }
+
+    public function info(string $domain): DomainInfo
+    {
+        $response = $this->context->getClient()->call('Info_Domain', ['domain' => $domain]);
+        return DomainInfo::fromResponse($response, $this->context);
     }
 }
