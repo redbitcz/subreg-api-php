@@ -16,7 +16,8 @@
     "php": ">=7.3",
     "ext-soap": "*",
     "ext-json": "*",
-    "psr/log": "^1.1"
+    "psr/log": "^1.1",
+    "nette/schema": "^1.0"
   },
   "autoload": {
     "psr-4": {

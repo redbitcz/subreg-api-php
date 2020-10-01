@@ -20,6 +20,6 @@ class DomainRepository
     public function list(): Domains
     {
         $response = $this->context->getClient()->call('Domains_List');
-        return new Domains($response->getMandatoryField('domains'), $this->context);
+        return Domains::fromResponse($response, $this->context);
     }
 }

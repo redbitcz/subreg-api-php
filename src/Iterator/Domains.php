@@ -10,6 +10,7 @@ use IteratorAggregate;
 use Soukicz\SubregApi\Context;
 use Soukicz\SubregApi\ContextAware;
 use Soukicz\SubregApi\Entity\Domain;
+use Soukicz\SubregApi\Response\Response;
 
 class Domains implements IteratorAggregate, Countable
 {
@@ -30,12 +31,17 @@ class Domains implements IteratorAggregate, Countable
     public function getIterator(): Generator
     {
         foreach ($this->domains as $domain) {
-            yield Domain::fromArray($domain, $this->getContext());
+            yield Domain::fromResponseItem($domain, $this->getContext());
         }
     }
 
-    public function count():int
+    public function count(): int
     {
         return count($this->domains);
+    }
+
+    public static function fromResponse(Response $response, ?Context $context = null ): self
+    {
+        return new self($response->getMandatoryField('domains'), $context);
     }
 }
