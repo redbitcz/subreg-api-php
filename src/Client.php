@@ -11,6 +11,7 @@ use SoapClient;
 use SoapFault;
 use Soukicz\SubregApi\Exception\ConnectionException;
 use Soukicz\SubregApi\Exception\InvalidRequestException;
+use Soukicz\SubregApi\Exception\UnauthorizedException;
 use Soukicz\SubregApi\Exception\UnexpectedResponseException;
 use Soukicz\SubregApi\Response\AnyResponse;
 use Soukicz\SubregApi\Response\ErrorResponse;
@@ -41,12 +42,24 @@ class Client
     {
         $apiToken = $this->getApiToken();
         $this->logger->debug(__CLASS__ . ' ' . $command, $data);
-        return $this->processCall($command, $data, $apiToken);
+        try {
+            return $this->processCall($command, $data, $apiToken);
+        } catch (UnauthorizedException $e) {
+            // try again with fresh token
+            $apiToken = $this->reloadApiToken();
+            return $this->processCall($command, $data, $apiToken);
+        }
     }
 
     private function getApiToken(): string
     {
         return $this->tokenCache->load($this->credentials->getIdentityHash(), Closure::fromCallable('self::login'));
+    }
+
+    protected function reloadApiToken(): string
+    {
+        $this->tokenCache->clear($this->credentials->getIdentityHash());
+        return $this->getApiToken();
     }
 
     private function login(): string
