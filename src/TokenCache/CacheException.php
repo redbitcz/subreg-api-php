@@ -8,5 +8,4 @@ use Soukicz\SubregApi\Exception\LogicException;
 
 class CacheException extends LogicException
 {
-
 }

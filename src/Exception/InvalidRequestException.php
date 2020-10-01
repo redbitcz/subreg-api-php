@@ -6,5 +6,4 @@ namespace Soukicz\SubregApi\Exception;
 
 class InvalidRequestException extends LogicException
 {
-
 }

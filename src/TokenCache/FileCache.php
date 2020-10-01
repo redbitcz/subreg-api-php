@@ -23,22 +23,18 @@ class FileCache implements ITokenCache
 
     public function load(string $cacheKey, ?callable $callback = null): ?string
     {
-//        try {
-            $token = $this->loadFormFile($cacheKey);
+        $token = $this->loadFormFile($cacheKey);
 
-            if($token === null && $callback !== null) {
-                $deps = [];
-                $token = $callback($cacheKey, $deps);
-                if (is_string($token)) {
-                    $expire = ($deps[self::EXPIRE] ?? null) instanceof DateTimeInterface ? $deps[self::EXPIRE] : null;
-                    $this->save($cacheKey, $token, $expire);
-                }
+        if ($token === null && $callback !== null) {
+            $deps = [];
+            $token = $callback($cacheKey, $deps);
+            if (is_string($token)) {
+                $expire = ($deps[self::EXPIRE] ?? null) instanceof DateTimeInterface ? $deps[self::EXPIRE] : null;
+                $this->save($cacheKey, $token, $expire);
             }
+        }
 
-            return $token;
-//        } catch (Exception $e) {
-//            return null;
-//        }
+        return $token;
     }
 
     /**

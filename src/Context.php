@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Soukicz\SubregApi;
 
-use Soukicz\SubregApi\Iterator\Domains;
 use Soukicz\SubregApi\Repository\DomainRepository;
 
 class Context
