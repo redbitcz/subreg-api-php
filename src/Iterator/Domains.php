@@ -40,8 +40,8 @@ class Domains implements IteratorAggregate, Countable
         return count($this->domains);
     }
 
-    public static function fromResponse(Response $response, ?Context $context = null ): self
+    public static function fromResponse(Response $response, ?Context $context = null): self
     {
-        return new self($response->getMandatoryField('domains'), $context);
+        return new self($response->getMandatoryField('domains') ?? [], $context);
     }
 }

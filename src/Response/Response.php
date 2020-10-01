@@ -53,7 +53,7 @@ class Response implements IAnyResponseProvider
 
     public function hasField(string $key): bool
     {
-        return isset($this->data[$key]);
+        return array_key_exists($key, $this->data);
     }
 
     public function getResponse(): ?AnyResponse

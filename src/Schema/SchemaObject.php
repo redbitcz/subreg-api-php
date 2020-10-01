@@ -30,7 +30,7 @@ trait SchemaObject
     protected function getItem(string $key)
     {
         try {
-            $this->getMandatoryItem($key);
+            return $this->getMandatoryItem($key);
         } catch (SchemaItemMissingException $e) {
             return null;
         }

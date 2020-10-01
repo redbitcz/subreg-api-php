@@ -13,16 +13,12 @@ use Soukicz\SubregApi\Helpers;
 use Soukicz\SubregApi\Schema;
 use Soukicz\SubregApi\Schema\SchemaObject;
 
-/*
- *  <xs:complexType name="Domains_List_Domain">
- *      <xs:sequence>
- *          <xs:element name="name" type="xs:string"/>
- *          <xs:element name="expire" type="xs:string"/>
- *          <xs:element name="autorenew" type="xs:integer"/>
- *      </xs:sequence>
- *  </xs:complexType>
-*/
-
+/**
+ * Schema
+ *      string	name	Domain name
+ *      string	expire	Domain expiration date
+ *      int	autorenew	Domain autorenew setting (0 - EXPIRE | 1 - AUTORENEW | 2 - RENEWONCE)
+ */
 class Domain
 {
     use SchemaObject;
@@ -49,13 +45,13 @@ class Domain
                     self::AUTORENEW_AUTORENEW,
                     self::AUTORENEW_RENEWONCE
                 )
-                    ->before([Helpers::class, 'handleSoapInt'])
-                    ->castTo('int')
+                    ->before([Helpers::class, 'soapInt'])
                     ->required(),
             ]
         );
     }
 
+    /** @return string Domain name */
     public function getName(): string
     {
         return $this->getMandatoryItem('name');
