@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Soukicz\SubregApi;
 
+use stdClass;
+
 class Helpers
 {
     /**
@@ -20,6 +22,7 @@ class Helpers
 
         return $value;
     }
+
     /**
      * Transfer fload-like string value to float, other types leave as is to correct validation
      * SOAP transfers all values as a string
@@ -33,5 +36,18 @@ class Helpers
         }
 
         return $value;
+    }
+
+    public static function toArray($object): array
+    {
+        $array = (array)$object;
+
+        foreach ($array as $index => $item) {
+            if (is_array($object) && $object instanceof stdClass) {
+                $array[$index] = self::toArray($item);
+            }
+        }
+
+        return $array;
     }
 }

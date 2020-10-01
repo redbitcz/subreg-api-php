@@ -7,24 +7,31 @@ namespace Soukicz\SubregApi\Schema;
 use Nette\Schema\Elements\Structure;
 use Nette\Schema\Processor;
 use Soukicz\SubregApi\Exception\SchemaItemMissingException;
+use Soukicz\SubregApi\Helpers;
+use stdClass;
 
 trait SchemaObject
 {
     private static $STRUCTURE_KEY_DELIMITER = '.';
 
-    /** @var array */
+    /** @var stdClass */
     private $data = [];
 
     abstract public function defineSchema(): Structure;
 
     protected function setData(array $data): void
     {
-        $this->data = (new Processor())->process($this->defineSchema()->castTo('array'), $data);
+        $this->data = (new Processor())->process($this->defineSchema(), $data);
     }
 
-    public function getData(): array
+    public function getData(): stdClass
     {
         return $this->data;
+    }
+
+    public function toArray(): array
+    {
+        return Helpers::toArray($this->data);
     }
 
     protected function getItem(string $key)
@@ -41,12 +48,12 @@ trait SchemaObject
         return $this->getItemRecursive(explode(self::$STRUCTURE_KEY_DELIMITER, $key), $this->data);
     }
 
-    private function getItemRecursive(array $keys, array $data, array $path = [])
+    private function getItemRecursive(array $keys, stdClass $data, array $path = [])
     {
         $key = array_shift($keys);
         $path[] = $key;
 
-        if (array_key_exists($key, $data) === false) {
+        if (property_exists($data, $key) === false) {
             throw new SchemaItemMissingException(
                 sprintf(
                     "Unable to get '%s' item from scheme because '%s' does not exists",
@@ -56,20 +63,20 @@ trait SchemaObject
             );
         }
         if (count($keys)) {
-            if (is_array($data[$key])) {
-                return $this->getItemRecursive($keys, $data[$key], $path);
+            if ($data->$key instanceof stdClass) {
+                return $this->getItemRecursive($keys, $data->$key, $path);
             }
 
             throw new SchemaItemMissingException(
                 sprintf(
-                    "Unable to get '%s' item from scheme because '%s' is not array but %s",
+                    "Unable to get '%s' item from scheme because '%s' is not structure but %s",
                     implode('.', array_merge($path, $keys)),
                     implode('.', $path),
-                    gettype($data[$key])
+                    gettype($data->$key)
                 )
             );
         }
 
-        return $data[$key];
+        return $data->$key;
     }
 }

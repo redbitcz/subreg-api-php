@@ -54,7 +54,7 @@ class DomainCheck
                             ->before([Helpers::class, 'soapInt']),
                         'amount_with_trustee' => Expect::float()->before([Helpers::class, 'soapFloat']),
                     ]
-                )->castTo('array')
+                )
             ]
         );
     }
