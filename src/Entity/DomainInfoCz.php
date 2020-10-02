@@ -33,7 +33,7 @@ use Soukicz\SubregApi\Schema\SchemaObject;
 
 
  */
-class DomainInfo
+class DomainInfoCz
 {
     use SchemaObject;
     use ContextAware;
@@ -43,7 +43,7 @@ class DomainInfo
     public const AUTORENEW_RENEWONCE = 2;
     public const PREMIUM_NOT_PREMIUM = 0;
     public const PREMIUM_IS_PREMIUM = 1;
-
+    
     public function __construct(array $data, ?Context $context)
     {
         $this->setData($data);
@@ -92,7 +92,6 @@ class DomainInfo
                 'crDate' => (new Schema\Date()),
                 'trDate' => (new Schema\Date()),
                 'upDate' => (new Schema\Date()),
-                'authid' => Expect::string(),
                 'status' => Expect::listOf(Expect::string()),
                 'rgp' => Expect::listOf(Expect::string()),
                 'autorenew' => Expect::anyOf(
@@ -103,10 +102,7 @@ class DomainInfo
                     ->before([Helpers::class, 'soapInt'])
                     ->required(),
 
-                'premium' => Expect::anyOf(self::PREMIUM_NOT_PREMIUM, self::PREMIUM_IS_PREMIUM),
-                'price' => Expect::float(),
                 'whoisproxy' => Expect::int()->before([Helpers::class, 'soapInt']),
-                'trustee' => Expect::int(),
                 'options' => $domainOptions,
             ]
         );
