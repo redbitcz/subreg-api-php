@@ -15,7 +15,7 @@ trait SchemaObject
     private static $STRUCTURE_KEY_DELIMITER = '.';
 
     /** @var stdClass */
-    private $data = [];
+    private $data;
 
     abstract public function defineSchema(): Structure;
 

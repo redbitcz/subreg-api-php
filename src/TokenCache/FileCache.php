@@ -29,6 +29,7 @@ class FileCache implements ITokenCache
             $deps = [];
             $token = $callback($cacheKey, $deps);
             if (is_string($token)) {
+                /** @phpstan-ignore-next-line  Offset 'expire' does not exist on array(). */
                 $expire = ($deps[self::EXPIRE] ?? null) instanceof DateTimeInterface ? $deps[self::EXPIRE] : null;
                 $this->save($cacheKey, $token, $expire);
             }

@@ -23,5 +23,11 @@
     "psr-4": {
       "Soukicz\\SubregApi\\": "src/"
     }
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^0.12.48"
+  },
+  "scripts": {
+    "phpstan": "vendor/bin/phpstan analyse src --level 5"
   }
 }
