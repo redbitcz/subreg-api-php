@@ -40,5 +40,4 @@ class ResponseExceptionMapper
         $exceptionClass = self::getExcetionClassForResponse($response);
         return new $exceptionClass($response);
     }
-
 }

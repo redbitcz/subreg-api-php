@@ -25,5 +25,4 @@ class Context
     {
         return new DomainRepository($this);
     }
-
 }

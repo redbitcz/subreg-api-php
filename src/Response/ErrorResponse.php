@@ -75,5 +75,4 @@ class ErrorResponse implements IAnyResponseProvider
     {
         return $this->response;
     }
-
 }
