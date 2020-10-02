@@ -15,9 +15,9 @@ use Soukicz\SubregApi\Schema\SchemaObject;
 
 /**
  * Schema
- *     - string	name	Domain name
- *     - string	expire	Domain expiration date
- *     - int	autorenew	Domain autorenew setting (0 - EXPIRE | 1 - AUTORENEW | 2 - RENEWONCE)
+ *     - string    name    Domain name
+ *     - string    expire    Domain expiration date
+ *     - int    autorenew    Domain autorenew setting (0 - EXPIRE | 1 - AUTORENEW | 2 - RENEWONCE)
  */
 class Domain
 {
@@ -66,9 +66,14 @@ class Domain
         return $this->getMandatoryItem('autorenew');
     }
 
-    public function info():DomainInfo
+    public function info(): DomainInfo
     {
-        $this->getMandatoryContext()->domains()->info($this->getName());
+        return $this->getMandatoryContext()->domains()->info($this->getName());
+    }
+
+    public function infoCz(): DomainInfoCz
+    {
+        return $this->getMandatoryContext()->domains()->infoCz($this->getName());
     }
 
     public static function fromResponseItem(array $data, ?Context $context = null): self

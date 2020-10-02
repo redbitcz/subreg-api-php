@@ -15,23 +15,21 @@ use Soukicz\SubregApi\Schema\SchemaObject;
 
 /**
  * Schema
- *      - string	domain	Domain name
- *      - array	contacts	Contacts (admin,tech,bill) associated with domain name
- *          - string	subregid	Contact ID from Subreg Database
- *          - string	registryid	Contact ID directly from Registry
- *      - array	hosts	Nameservers
- *      - string	registrant	Domain name owner
- *      - string	crDate	Date of domain creation
- *      - string	trDate	Date of domain last transfer
- *      - string	upDate	Date of domain last update
- *      - string	exDate	Date of domain expiration
- *      - string	authid	Domain password for transfers
- *      - array	status	Domain status (ok,clientTransferProhibited,etc..)
- *      - int	autorenew	Domain autorenew setting (0 - EXPIRE | 1 - AUTORENEW | 2 - RENEWONCE)
- *      - int	premium	0 - domain is not premium, 1 - domain is premium with premium price
- *      - decimal	price	Domain price
-
-
+ *      - string    domain    Domain name
+ *      - array    contacts    Contacts (admin,tech,bill) associated with domain name
+ *          - string    subregid    Contact ID from Subreg Database
+ *          - string    registryid    Contact ID directly from Registry
+ *      - array    hosts    Nameservers
+ *      - string    registrant    Domain name owner
+ *      - string    crDate    Date of domain creation
+ *      - string    trDate    Date of domain last transfer
+ *      - string    upDate    Date of domain last update
+ *      - string    exDate    Date of domain expiration
+ *      - string    authid    Domain password for transfers
+ *      - array    status    Domain status (ok,clientTransferProhibited,etc..)
+ *      - int    autorenew    Domain autorenew setting (0 - EXPIRE | 1 - AUTORENEW | 2 - RENEWONCE)
+ *      - int    premium    0 - domain is not premium, 1 - domain is premium with premium price
+ *      - decimal    price    Domain price
  */
 class DomainInfoCz
 {
@@ -41,9 +39,7 @@ class DomainInfoCz
     public const AUTORENEW_EXPIRE = 0;
     public const AUTORENEW_AUTORENEW = 1;
     public const AUTORENEW_RENEWONCE = 2;
-    public const PREMIUM_NOT_PREMIUM = 0;
-    public const PREMIUM_IS_PREMIUM = 1;
-    
+
     public function __construct(array $data, ?Context $context)
     {
         $this->setData($data);
@@ -108,7 +104,7 @@ class DomainInfoCz
         );
     }
 
-    public function getName():string
+    public function getName(): string
     {
         return $this->getMandatoryItem('domain');
     }
