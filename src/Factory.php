@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi;
+namespace Redbitcz\SubregApi;
 
-use Soukicz\SubregApi\Context\Context;
-use Soukicz\SubregApi\TokenCache\FileCache;
+use Redbitcz\SubregApi\Context\Context;
+use Redbitcz\SubregApi\TokenCache\FileCache;
 
 class Factory
 {

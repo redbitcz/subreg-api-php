@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\Response;
+namespace Redbitcz\SubregApi\Response;
 
-use Soukicz\SubregApi\Exception\InvalidResponseException;
-use Soukicz\SubregApi\Exception\LogicException;
+use Redbitcz\SubregApi\Exception\InvalidResponseException;
+use Redbitcz\SubregApi\Exception\LogicException;
 
 class Response implements IAnyResponseProvider
 {

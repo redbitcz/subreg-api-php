@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\Exception;
+namespace Redbitcz\SubregApi\Exception;
 
-use Soukicz\SubregApi\Response\IAnyResponseProvider;
+use Redbitcz\SubregApi\Response\IAnyResponseProvider;
 use Throwable;
 
 class ResponseException extends RuntimeException

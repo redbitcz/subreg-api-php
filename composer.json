@@ -1,11 +1,12 @@
 {
-  "name": "soukicz/subreg-api",
-  "description": "PHP client for working with Subreg.cz API",
+  "name": "redbit/subreg-api-php",
+  "description": "Subreg.cz API client for PHP",
+  "keywords": ["subreg", "gransy", "api", "client"],
   "license": ["MIT"],
   "authors": [
     {
-      "name": "Petr Soukup",
-      "email": "soukup@simplia.cz"
+      "name": "Redbit s.r.o.",
+      "homepage": "https://www.redbit.cz"
     },
     {
       "name": "Jakub Bouček",
@@ -21,7 +22,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Soukicz\\SubregApi\\": "src/"
+      "Redbitcz\\SubregApi\\": "src/"
     }
   },
   "require-dev": {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\Response;
+namespace Redbitcz\SubregApi\Response;
 
 class AnyResponse implements IAnyResponseProvider
 {

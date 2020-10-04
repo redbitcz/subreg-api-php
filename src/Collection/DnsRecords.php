@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\Collection;
+namespace Redbitcz\SubregApi\Collection;
 
 use Countable;
 use Generator;
 use IteratorAggregate;
-use Soukicz\SubregApi\Context\Context;
-use Soukicz\SubregApi\Context\ContextAware;
-use Soukicz\SubregApi\Entity\DnsRecord;
-use Soukicz\SubregApi\Response\Response;
+use Redbitcz\SubregApi\Context\Context;
+use Redbitcz\SubregApi\Context\ContextAware;
+use Redbitcz\SubregApi\Entity\DnsRecord;
+use Redbitcz\SubregApi\Response\Response;
 
 class DnsRecords implements IteratorAggregate, Countable
 {

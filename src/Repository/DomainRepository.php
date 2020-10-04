@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\Repository;
+namespace Redbitcz\SubregApi\Repository;
 
-use Soukicz\SubregApi\Collection\Domains;
-use Soukicz\SubregApi\Context\Context;
-use Soukicz\SubregApi\Entity\DomainCheck;
-use Soukicz\SubregApi\Entity\DomainInfo;
-use Soukicz\SubregApi\Entity\DomainInfoCz;
+use Redbitcz\SubregApi\Collection\Domains;
+use Redbitcz\SubregApi\Context\Context;
+use Redbitcz\SubregApi\Entity\DomainCheck;
+use Redbitcz\SubregApi\Entity\DomainInfo;
+use Redbitcz\SubregApi\Entity\DomainInfoCz;
 
 class DomainRepository
 {

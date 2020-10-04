@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\Entity;
+namespace Redbitcz\SubregApi\Entity;
 
 use DateTimeImmutable;
 use Nette\Schema\Elements\Structure;
 use Nette\Schema\Expect;
-use Soukicz\SubregApi\Context\Context;
-use Soukicz\SubregApi\Context\ContextAware;
-use Soukicz\SubregApi\Helpers;
-use Soukicz\SubregApi\Schema;
-use Soukicz\SubregApi\Schema\SchemaObject;
+use Redbitcz\SubregApi\Context\Context;
+use Redbitcz\SubregApi\Context\ContextAware;
+use Redbitcz\SubregApi\Helpers;
+use Redbitcz\SubregApi\Schema;
+use Redbitcz\SubregApi\Schema\SchemaObject;
 
 /**
  * ## Schema

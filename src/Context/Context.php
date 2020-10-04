@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\Context;
+namespace Redbitcz\SubregApi\Context;
 
-use Soukicz\SubregApi\Client;
-use Soukicz\SubregApi\Repository\DnsRepository;
-use Soukicz\SubregApi\Repository\DomainRepository;
+use Redbitcz\SubregApi\Client;
+use Redbitcz\SubregApi\Repository\DnsRepository;
+use Redbitcz\SubregApi\Repository\DomainRepository;
 
 class Context
 {

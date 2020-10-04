@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\TokenCache;
+namespace Redbitcz\SubregApi\TokenCache;
 
-use Soukicz\SubregApi\Exception\LogicException;
+use Redbitcz\SubregApi\Exception\LogicException;
 
 class CacheException extends LogicException
 {

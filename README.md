@@ -9,7 +9,7 @@
 ```php
 require __DIR__ . '/autoload.php';
 
-use Soukicz\SubregApi;
+use Redbitcz\SubregApi;
 
 $context = SubregApi\Factory::createContext('username', 'password', '/temp');
 

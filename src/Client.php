@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi;
+namespace Redbitcz\SubregApi;
 
 use Closure;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use SoapClient;
 use SoapFault;
-use Soukicz\SubregApi\Exception\ConnectionException;
-use Soukicz\SubregApi\Exception\InvalidRequestException;
-use Soukicz\SubregApi\Exception\UnauthorizedException;
-use Soukicz\SubregApi\Exception\UnexpectedResponseException;
-use Soukicz\SubregApi\Response\AnyResponse;
-use Soukicz\SubregApi\Response\ErrorResponse;
-use Soukicz\SubregApi\Response\Response;
-use Soukicz\SubregApi\Response\ResponseExceptionMapper;
-use Soukicz\SubregApi\TokenCache\ITokenCache;
-use Soukicz\SubregApi\TokenCache\MemoryCache;
+use Redbitcz\SubregApi\Exception\ConnectionException;
+use Redbitcz\SubregApi\Exception\InvalidRequestException;
+use Redbitcz\SubregApi\Exception\UnauthorizedException;
+use Redbitcz\SubregApi\Exception\UnexpectedResponseException;
+use Redbitcz\SubregApi\Response\AnyResponse;
+use Redbitcz\SubregApi\Response\ErrorResponse;
+use Redbitcz\SubregApi\Response\Response;
+use Redbitcz\SubregApi\Response\ResponseExceptionMapper;
+use Redbitcz\SubregApi\TokenCache\ITokenCache;
+use Redbitcz\SubregApi\TokenCache\MemoryCache;
 
 class Client
 {

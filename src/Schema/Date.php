@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\Schema;
+namespace Redbitcz\SubregApi\Schema;
 
 use DateTimeImmutable;
 use DateTimeZone;

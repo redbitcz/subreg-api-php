@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi;
+namespace Redbitcz\SubregApi;
 
 class Credentials
 {

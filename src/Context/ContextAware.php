@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\Context;
+namespace Redbitcz\SubregApi\Context;
 
-use Soukicz\SubregApi\Exception\LogicException;
+use Redbitcz\SubregApi\Exception\LogicException;
 
 trait ContextAware
 {

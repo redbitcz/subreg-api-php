@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\Repository;
+namespace Redbitcz\SubregApi\Repository;
 
-use Soukicz\SubregApi\Collection\DnsRecords;
-use Soukicz\SubregApi\Context\Context;
+use Redbitcz\SubregApi\Collection\DnsRecords;
+use Redbitcz\SubregApi\Context\Context;
 
 class DnsRepository
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\TokenCache;
+namespace Redbitcz\SubregApi\TokenCache;
 
 use DateTimeImmutable;
 use DateTimeInterface;

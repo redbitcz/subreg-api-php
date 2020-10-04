@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\Schema;
+namespace Redbitcz\SubregApi\Schema;
 
 use Nette\Schema\Elements\Structure;
 use Nette\Schema\Processor;
-use Soukicz\SubregApi\Exception\SchemaItemMissingException;
-use Soukicz\SubregApi\Helpers;
+use Redbitcz\SubregApi\Exception\SchemaItemMissingException;
+use Redbitcz\SubregApi\Helpers;
 use stdClass;
 
 trait SchemaObject

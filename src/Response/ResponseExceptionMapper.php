@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\Response;
+namespace Redbitcz\SubregApi\Response;
 
-use Soukicz\SubregApi\Exception as E;
+use Redbitcz\SubregApi\Exception as E;
 
 class ResponseExceptionMapper
 {

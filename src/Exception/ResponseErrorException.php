@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\Exception;
+namespace Redbitcz\SubregApi\Exception;
 
-use Soukicz\SubregApi\Response\ErrorResponse;
+use Redbitcz\SubregApi\Response\ErrorResponse;
 use Throwable;
 
 class ResponseErrorException extends NetworkException
