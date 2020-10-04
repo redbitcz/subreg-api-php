@@ -7,8 +7,6 @@ namespace Redbitcz\SubregApi;
 use Closure;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
-use SoapClient;
-use SoapFault;
 use Redbitcz\SubregApi\Exception\ConnectionException;
 use Redbitcz\SubregApi\Exception\InvalidRequestException;
 use Redbitcz\SubregApi\Exception\UnauthorizedException;
@@ -19,6 +17,8 @@ use Redbitcz\SubregApi\Response\Response;
 use Redbitcz\SubregApi\Response\ResponseExceptionMapper;
 use Redbitcz\SubregApi\TokenCache\ITokenCache;
 use Redbitcz\SubregApi\TokenCache\MemoryCache;
+use SoapClient;
+use SoapFault;
 
 class Client
 {
