@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi\Iterator;
+namespace Soukicz\SubregApi\Collection;
 
 use Countable;
 use Generator;

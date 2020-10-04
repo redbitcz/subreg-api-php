@@ -8,7 +8,7 @@ use Soukicz\SubregApi\Context\Context;
 use Soukicz\SubregApi\Entity\DomainCheck;
 use Soukicz\SubregApi\Entity\DomainInfo;
 use Soukicz\SubregApi\Entity\DomainInfoCz;
-use Soukicz\SubregApi\Iterator\Domains;
+use Soukicz\SubregApi\Collection\Domains;
 
 class DomainRepository
 {
