@@ -27,4 +27,9 @@ class Context
     {
         return new DomainRepository($this);
     }
+
+    public function dns(string $domain): DnsRepository
+    {
+        return new DnsRepository($domain, $this);
+    }
 }

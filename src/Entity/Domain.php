@@ -14,10 +14,10 @@ use Soukicz\SubregApi\Schema;
 use Soukicz\SubregApi\Schema\SchemaObject;
 
 /**
- * Schema
- *     - string    name    Domain name
- *     - string    expire    Domain expiration date
- *     - int    autorenew    Domain autorenew setting (0 - EXPIRE | 1 - AUTORENEW | 2 - RENEWONCE)
+ * ## Schema
+ * - string    name    Domain name
+ * - string    expire    Domain expiration date
+ * - int    autorenew    Domain autorenew setting (0 - EXPIRE | 1 - AUTORENEW | 2 - RENEWONCE)
  */
 class Domain
 {

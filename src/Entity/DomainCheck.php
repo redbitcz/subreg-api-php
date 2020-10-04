@@ -13,15 +13,15 @@ use Soukicz\SubregApi\Response\Response;
 use Soukicz\SubregApi\Schema\SchemaObject;
 
 /**
- * Schema
- *     - string    name    Domain name
- *     - int    avail    0 - not available, 1 - available
- *     - string    existing_claim_id    ID of existing TMCH claim - domain with claim id isn't possible register via API
- *     - array    price
- *         - float    amount    Total domain price (premium price included)
- *         - float    amount_with_trustee    Total domain price with trustee (if domain required), premium price included
- *         - int    premium    0 - domain is not premium, 1 - domain is premium with premium price
- *         - string    currency    Currency of this price
+ * ## Schema
+ * - string    name    Domain name
+ * - int    avail    0 - not available, 1 - available
+ * - string    existing_claim_id    ID of existing TMCH claim - domain with claim id isn't possible register via API
+ * - array    price
+ *     - float    amount    Total domain price (premium price included)
+ *     - float    amount_with_trustee    Total domain price with trustee (if domain required), premium price included
+ *     - int    premium    0 - domain is not premium, 1 - domain is premium with premium price
+ *     - string    currency    Currency of this price
  */
 class DomainCheck
 {
