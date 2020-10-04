@@ -13,7 +13,7 @@ use Soukicz\SubregApi;
 
 $context = SubregApi\Factory::createContext('username', 'password', '/temp');
 
-foreach($context->domains()->list() as $domain) {
+foreach($context->domain()->list() as $domain) {
     echo $domain->getName() . PHP_EOL;
 
     foreach($domain->getDnsZone() as $dnsRecord) {

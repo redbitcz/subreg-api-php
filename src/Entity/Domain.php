@@ -68,12 +68,12 @@ class Domain
 
     public function info(): DomainInfo
     {
-        return $this->getMandatoryContext()->domains()->info($this->getName());
+        return $this->getMandatoryContext()->domain()->info($this->getName());
     }
 
     public function infoCz(): DomainInfoCz
     {
-        return $this->getMandatoryContext()->domains()->infoCz($this->getName());
+        return $this->getMandatoryContext()->domain()->infoCz($this->getName());
     }
 
     public static function fromResponseItem(array $data, ?Context $context = null): self

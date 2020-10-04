@@ -23,7 +23,7 @@ class Context
         return $this->client;
     }
 
-    public function domains(): DomainRepository
+    public function domain(): DomainRepository
     {
         return new DomainRepository($this);
     }
