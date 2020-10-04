@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Soukicz\SubregApi;
+namespace Soukicz\SubregApi\Context;
 
+use Soukicz\SubregApi\Client;
+use Soukicz\SubregApi\Repository\DnsRepository;
 use Soukicz\SubregApi\Repository\DomainRepository;
 
 class Context

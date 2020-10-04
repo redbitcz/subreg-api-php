@@ -6,8 +6,8 @@ namespace Soukicz\SubregApi\Entity;
 
 use Nette\Schema\Elements\Structure;
 use Nette\Schema\Expect;
-use Soukicz\SubregApi\Context;
-use Soukicz\SubregApi\ContextAware;
+use Soukicz\SubregApi\Context\Context;
+use Soukicz\SubregApi\Context\ContextAware;
 use Soukicz\SubregApi\Helpers;
 use Soukicz\SubregApi\Response\Response;
 use Soukicz\SubregApi\Schema\SchemaObject;

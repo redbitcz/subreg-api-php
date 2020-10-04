@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Soukicz\SubregApi;
 
+use Soukicz\SubregApi\Context\Context;
 use Soukicz\SubregApi\TokenCache\FileCache;
 
 class Factory

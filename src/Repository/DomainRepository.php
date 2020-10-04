@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Soukicz\SubregApi\Repository;
 
-use Soukicz\SubregApi\Context;
+use Soukicz\SubregApi\Context\Context;
 use Soukicz\SubregApi\Entity\DomainCheck;
 use Soukicz\SubregApi\Entity\DomainInfo;
 use Soukicz\SubregApi\Entity\DomainInfoCz;

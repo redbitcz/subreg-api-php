@@ -7,8 +7,8 @@ namespace Soukicz\SubregApi\Iterator;
 use Countable;
 use Generator;
 use IteratorAggregate;
-use Soukicz\SubregApi\Context;
-use Soukicz\SubregApi\ContextAware;
+use Soukicz\SubregApi\Context\Context;
+use Soukicz\SubregApi\Context\ContextAware;
 use Soukicz\SubregApi\Entity\Domain;
 use Soukicz\SubregApi\Response\Response;
 
