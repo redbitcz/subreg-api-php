@@ -24,7 +24,7 @@ class Helpers
     }
 
     /**
-     * Transfer fload-like string value to float, other types leave as is to correct validation
+     * Transfer float-like string value to float, other types leave as is to correct validation
      * SOAP transfers all values as a string
      * @param mixed $value
      * @return float|mixed
@@ -38,6 +38,12 @@ class Helpers
         return $value;
     }
 
+
+    /**
+     * Recursive cast any type to array, array and stdClass objects was casted recursively
+     * @param array|stdClass|mixed $object
+     * @return array
+     */
     public static function toArray($object): array
     {
         $array = (array)$object;
