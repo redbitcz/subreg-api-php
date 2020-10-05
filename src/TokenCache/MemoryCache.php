@@ -11,6 +11,7 @@ class MemoryCache implements ITokenCache
 {
     /** @var string[] */
     private $token = [];
+
     /** @var DateTimeInterface[] */
     private $expire = [];
 

@@ -12,10 +12,13 @@ class ErrorResponse implements IAnyResponseProvider
 
     /** @var string */
     private $message;
+
     /** @var string */
     private $majorCode;
+
     /** @var string */
     private $minorCode;
+
     /** @var AnyResponse|null */
     private $response;
 

@@ -26,8 +26,10 @@ class Client
 
     /** @var SoapClient|null */
     private $client;
+
     /** @var Credentials */
     private $credentials;
+
     /** @var ITokenCache */
     private $tokenCache;
 

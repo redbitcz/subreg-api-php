@@ -11,6 +11,7 @@ class ResponseErrorException extends NetworkException
 {
     /** @var ErrorResponse */
     private $response;
+
     /** @var string */
     protected $code;
 

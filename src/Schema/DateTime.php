@@ -13,10 +13,13 @@ class DateTime implements Schema
 {
     /** @var bool */
     private $required = false;
+
     /** @var bool */
     private $nullable = true;
+
     /** @var string */
     private $format;
+
     /** @var DateTimeZone */
     private $timeZone;
 
