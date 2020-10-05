@@ -19,7 +19,7 @@ It requires PHP version 7.3 and supports PHP up to 7.4.
 ## Access level
 
 You can use Package with two ways:
-- **low-level access**: just call raw command and get raw response – the Package only handle Request authentication,
+- **raw access**: just call raw command and get raw response – the Package only handle Request authentication,
     Connection or Server errors and check basic Envelope od Response data. 
 - **context access**: full service access which is allow traversing over data, checks Request and Response data by
     strict Schema, access to all properties via strict-typed Getters.
@@ -55,7 +55,7 @@ If you need try your App to [test Environment](https://subreg.cz/manual/?cmd=Mai
 $credentials = new \Redbitcz\SubregApi\Credentials('microsoft', 'password', 'https://ote-soap.subreg.cz/cmd.php');
 ```  
 
-## Usage
+## Usage Raw access
 
 Use `Credentials` object to create `Client`.
 
@@ -145,13 +145,68 @@ $client = \Redbitcz\SubregApi\Factory::createClientForAdministrator('microsoft',
 
 ### Example
 ```php
-// Create client
 $client = \Redbitcz\SubregApi\Factory::createClient('microsoft', 'password');
 
-// Send request to API
 $response = $client->call('Info_Domain', ['domain' => 'subreg.cz']);
 
-// Print response
 echo "Domain {$response->getItem('name')} is expiring at {$response->getItem('exDate')}.";
 // Domain subreg.cz is expiring at 2023-04-22.
+```
+
+## Usage Context access
+
+At first create `Context` object instance. Use `Factory` helper for simple create it:
+
+```php
+$context = \Redbitcz\SubregApi\Factory::createContext('microsoft', 'password');
+```
+
+With `Context` object you can access to API resources comfortably by
+[fluent-like properties](https://dev.to/mofiqul/fluent-interface-and-method-chaining-in-php-and-javascript-251c).
+
+```php
+foreach ($context->domain()->list() as $domain) {
+    echo "Domain {$domain->getName()} is expiring at {$domain->getExpire()->format('Y-m-d')}.\n";
+}
+// Domain my-first-domain.cz is expiring at 2023-04-22.
+// Domain my-second-domain.cz is expiring at 2020-01-01.
+// Domain my-third-domain.cz is expiring at 2021-08-30.
+// Domain my-fourth-domain.cz is expiring at 2022-01-15.
+// Domain my-fifth-domain.cz is expiring at 2020-05-13.
+// Domain my-sixth-domain.cz is expiring at 2020-05-13.
+```
+
+**NOTE:** Context access is covering only few most-used of [Subreg.cz API commands](https://subreg.cz/manual/).
+
+## Work in progress
+Package is still under development.
+
+### Future examples in vision
+
+Bulk renew of expiring domains:
+```php
+$expiringDomains = $context->domain()->list()->filter(['expire <' => new DateTime('+ 1 month')]); 
+
+foreach ($expiringDomains as $domain) {
+    $order = $domain->renew(1); // 1 year
+    echo "Domain {$domain->getName()} is renewed by order ID: {$order->getId()}.\n";
+}
+// Domain my-second-domain.cz is renewed by order ID: 12345000.
+// Domain my-fifth-domain.cz is renewed by order ID: 12345001.
+// Domain my-sixth-domain.cz is renewed by order ID: 12345002.
+```
+
+Remove deprecated SPF record from all domains zones:
+```php
+foreach ($context->domain()->list() as $domain) {
+    foreach ($domain->dns()->list() as $dnsRecord) {
+        if($dnsRecord->isType('SPF')) {
+            $dnsRecord->delete();
+            echo "Removed SPF record for {$dnsRecord->getFqn()}.\n";
+
+        }
+    }
+}
+// Removed SPF record for my-first-domain.cz.
+// Removed SPF record for subdomain.my-first-domain.cz.
 ```
