@@ -53,17 +53,22 @@ class DnsRecord implements SchemaEntity
 
     public function getId(): int
     {
-        return $this->getItem('id');
+        return $this->getMandatoryItem('id');
     }
 
     public function getName(): string
     {
-        return $this->getItem('name');
+        return $this->getMandatoryItem('name');
     }
 
     public function getType(): string
     {
-        return $this->getItem('type');
+        return $this->getMandatoryItem('type');
+    }
+
+    public function isType(string $type): bool
+    {
+        return strcasecmp($this->getMandatoryItem('type'), $type) === 0;
     }
 
     public function getContent(): ?string

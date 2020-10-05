@@ -60,7 +60,12 @@ class Filter implements IteratorAggregate
             }
 
             // Parse expression to key + operator ('date < ' => 'date' + '<')
-            if (preg_match('/^(?<key>[.\w]+)\s*(?<operator>:\w:|[=<>!~]+)?\s*$/D', $key, $matches) === 0) {
+            $result = preg_match(
+                '/^\s*(?<command>[!@])?\s*(?<key>[.\w]+)(?:\((?<argument>\w+|\$)?\))?\s*(?<operator>:\w:|[=<>!~]+)?\s*$/D',
+                $key,
+                $matches
+            );
+            if ($result === 0) {
                 throw new LogicException("Filter format expression '$key' is invalid");
             }
             $key = $matches['key'];

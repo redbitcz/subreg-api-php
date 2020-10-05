@@ -185,7 +185,7 @@ Package is still under development.
 
 Bulk renew of expiring domains:
 ```php
-$expiringDomains = $context->domain()->list()->filter(['expire <' => new DateTime('+ 1 month')]); 
+$expiringDomains = $context->domain()->list()->filter(['expire < ' => new DateTime('+ 1 month')]); 
 
 foreach ($expiringDomains as $domain) {
     $order = $domain->renew(1); // 1 year
@@ -196,17 +196,14 @@ foreach ($expiringDomains as $domain) {
 // Domain my-sixth-domain.cz is renewed by order ID: 12345002.
 ```
 
-Remove deprecated SPF record from all domains zones:
+Remove deprecated SPF record from domains zones for 3th+ level domain:
 ```php
 foreach ($context->domain()->list() as $domain) {
-    foreach ($domain->dns()->list() as $dnsRecord) {
-        if($dnsRecord->isType('SPF')) {
-            $dnsRecord->delete();
-            echo "Removed SPF record for {$dnsRecord->getFqn()}.\n";
-
-        }
+    foreach ($domain->dns()->list()->filter(['!isType' => 'SPF', '@getFqn() ~ ' => '/\w+\.\w+\.\w+$/']) as $dnsRecord) {
+        $dnsRecord->delete();
+        echo "Removed SPF record for {$dnsRecord->getFqn()}.\n";
     }
 }
-// Removed SPF record for my-first-domain.cz.
 // Removed SPF record for subdomain.my-first-domain.cz.
+// Removed SPF record for cluster-1.region-eu.my-thitd-domain.cz.
 ```
