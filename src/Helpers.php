@@ -49,7 +49,7 @@ class Helpers
         $array = (array)$object;
 
         foreach ($array as $index => $item) {
-            if (is_array($object) || $object instanceof stdClass) {
+            if (is_array($item) || $item instanceof stdClass) {
                 $array[$index] = self::toArray($item);
             }
         }
