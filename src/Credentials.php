@@ -57,4 +57,26 @@ class Credentials
     {
         return md5(serialize([$this->login, $this->password, $this->url, $this->namespace]));
     }
+
+    /**
+     * Create Credentials for administrator account
+     * You can you your admin account in format `admin#user` (for example `gates#microsoft`) to login!
+     * You must use admin password instead of your account password and admin must have API access sign.
+     *
+     * @param string $user Username for user (company login)
+     * @param string $admin Username fro administrator
+     * @param string $password
+     * @param string $url
+     * @param string $namespace
+     * @return self
+     */
+    public static function forAdministrator(
+        string $user,
+        string $admin,
+        string $password,
+        string $url = self::DEFAULT_URL,
+        string $namespace = self::DEFAULT_NAMESPACE
+    ): self {
+        return new self("{$admin}#{$user}", $password, $url, $namespace);
+    }
 }
