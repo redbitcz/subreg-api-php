@@ -71,7 +71,7 @@ class Client
         $this->logger->debug(__CLASS__ . ' Login', ['password' => '**REDACTED**'] + $credentialsData);
         $response = $this->processCall('Login', $credentialsData);
 
-        if ($response->hasField('ssid') === false) {
+        if ($response->hasItem('ssid') === false) {
             throw new UnexpectedResponseException(
                 "Expected Login response field 'ssid' missing",
                 0,
@@ -79,7 +79,7 @@ class Client
             );
         }
 
-        return (string)$response->getField('ssid');
+        return (string)$response->getItem('ssid');
     }
 
     private function processCall(string $command, array $data, ?string $token = null): Response

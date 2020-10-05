@@ -11,6 +11,7 @@ class Response implements IAnyResponseProvider
 {
     /** @var array */
     private $data;
+
     /** @var AnyResponse|null */
     private $response;
 
@@ -33,9 +34,9 @@ class Response implements IAnyResponseProvider
         return $this->data;
     }
 
-    public function getMandatoryField(string $key)
+    public function getMandatoryItem(string $key)
     {
-        if ($this->hasField($key) === false) {
+        if ($this->hasItem($key) === false) {
             throw new InvalidResponseException("Required response field '{$key}' missing", 0, $this);
         }
 
@@ -46,12 +47,12 @@ class Response implements IAnyResponseProvider
      * @param string $key
      * @return mixed|null
      */
-    public function getField(string $key)
+    public function getItem(string $key)
     {
         return $this->data[$key] ?? null;
     }
 
-    public function hasField(string $key): bool
+    public function hasItem(string $key): bool
     {
         return array_key_exists($key, $this->data);
     }
