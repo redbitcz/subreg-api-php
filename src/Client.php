@@ -40,6 +40,12 @@ class Client
 
     public function call(string $command, array $data = []): Response
     {
+        if (strcasecmp(trim($command), 'Login') === 0) {
+            throw new InvalidRequestException(
+                'Do not call \'Login\' command directly - package is fully handling authentication for You'
+            );
+        }
+
         $apiToken = $this->getApiToken();
         $this->logger->debug(__CLASS__ . ' ' . $command, $data);
         try {
