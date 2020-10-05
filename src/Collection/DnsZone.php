@@ -12,12 +12,13 @@ use Redbitcz\SubregApi\Context\ContextAware;
 use Redbitcz\SubregApi\Entity\DnsRecord;
 use Redbitcz\SubregApi\Response\Response;
 
-class DnsRecords implements IteratorAggregate, Countable
+class DnsZone implements IteratorAggregate, Countable
 {
     use ContextAware;
 
     /** @var string */
     private $domain;
+
     /** @var array */
     private $records;
 
@@ -56,8 +57,8 @@ class DnsRecords implements IteratorAggregate, Countable
     public static function fromResponse(Response $response, ?Context $context = null): self
     {
         return new self(
-            $response->getMandatoryField('domain'),
-            $response->getMandatoryField('records') ?? [],
+            $response->getMandatoryItem('domain'),
+            $response->getMandatoryItem('records') ?? [],
             $context
         );
     }

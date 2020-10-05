@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Redbitcz\SubregApi\Repository;
 
-use Redbitcz\SubregApi\Collection\DnsRecords;
+use Redbitcz\SubregApi\Collection\DnsZone;
 use Redbitcz\SubregApi\Context\Context;
 
 class DnsRepository
 {
     /** @var Context */
     private $context;
+
     /** @var string */
     private $domain;
 
@@ -20,9 +21,9 @@ class DnsRepository
         $this->domain = $domain;
     }
 
-    public function list(): DnsRecords
+    public function list(): DnsZone
     {
         $response = $this->context->getClient()->call('Get_DNS_Zone', ['domain' => $this->domain]);
-        return DnsRecords::fromResponse($response, $this->context);
+        return DnsZone::fromResponse($response, $this->context);
     }
 }
