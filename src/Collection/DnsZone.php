@@ -10,6 +10,7 @@ use IteratorAggregate;
 use Redbitcz\SubregApi\Context\Context;
 use Redbitcz\SubregApi\Context\ContextAware;
 use Redbitcz\SubregApi\Entity\DnsRecord;
+use Redbitcz\SubregApi\Entity\SchemaEntity;
 use Redbitcz\SubregApi\Response\Response;
 
 class DnsZone implements IteratorAggregate, Countable
@@ -30,13 +31,23 @@ class DnsZone implements IteratorAggregate, Countable
     }
 
     /**
-     * @return Generator|DnsRecord[]
+     * @return Generator|SchemaEntity[]|DnsRecord[]
      */
     public function getIterator(): Generator
     {
         foreach ($this->records as $record) {
             yield DnsRecord::fromResponseItem($this->domain, $record, $this->getContext());
         }
+    }
+
+    public function filter(array $expression): Filter
+    {
+        return Filter::createForExpression($this, $expression);
+    }
+
+    public function callbackFilter(callable $filter): Filter
+    {
+        return Filter::createForCallback($this, $filter);
     }
 
     public function count(): int

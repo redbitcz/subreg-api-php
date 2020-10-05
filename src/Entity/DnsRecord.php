@@ -22,7 +22,7 @@ use Redbitcz\SubregApi\Schema\SchemaObject;
  *     - int    prio    Priority of this record (MX records only)
  *     - int    ttl    TTL value
  */
-class DnsRecord
+class DnsRecord implements SchemaEntity
 {
     use SchemaObject;
     use ContextAware;

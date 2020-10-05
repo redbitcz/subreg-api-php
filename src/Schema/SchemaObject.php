@@ -43,6 +43,16 @@ trait SchemaObject
         }
     }
 
+    public function hasItem(string $key): bool
+    {
+        try {
+            $this->getMandatoryItem($key);
+            return true;
+        } catch (SchemaItemMissingException $e) {
+            return false;
+        }
+    }
+
     public function getMandatoryItem(string $key)
     {
         return $this->getItemRecursive(explode(self::$STRUCTURE_KEY_DELIMITER, $key), $this->data);

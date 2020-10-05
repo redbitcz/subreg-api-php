@@ -19,7 +19,7 @@ use Redbitcz\SubregApi\Schema\SchemaObject;
  * - string    expire    Domain expiration date
  * - int    autorenew    Domain autorenew setting (0 - EXPIRE | 1 - AUTORENEW | 2 - RENEWONCE)
  */
-class Domain
+class Domain implements SchemaEntity
 {
     use SchemaObject;
     use ContextAware;

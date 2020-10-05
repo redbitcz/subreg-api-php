@@ -31,7 +31,7 @@ use Redbitcz\SubregApi\Schema\SchemaObject;
  * - int    premium    0 - domain is not premium, 1 - domain is premium with premium price
  * - decimal    price    Domain price
  */
-class DomainInfo
+class DomainInfo implements SchemaEntity
 {
     use SchemaObject;
     use ContextAware;

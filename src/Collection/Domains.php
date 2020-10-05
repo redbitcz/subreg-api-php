@@ -10,6 +10,7 @@ use IteratorAggregate;
 use Redbitcz\SubregApi\Context\Context;
 use Redbitcz\SubregApi\Context\ContextAware;
 use Redbitcz\SubregApi\Entity\Domain;
+use Redbitcz\SubregApi\Entity\SchemaEntity;
 use Redbitcz\SubregApi\Response\Response;
 
 class Domains implements IteratorAggregate, Countable
@@ -26,13 +27,23 @@ class Domains implements IteratorAggregate, Countable
     }
 
     /**
-     * @return Generator|Domain[]
+     * @return Generator|SchemaEntity[]|Domain[]
      */
     public function getIterator(): Generator
     {
         foreach ($this->domains as $domain) {
             yield Domain::fromResponseItem($domain, $this->getContext());
         }
+    }
+
+    public function filter(array $expression): Filter
+    {
+        return Filter::createForExpression($this, $expression);
+    }
+
+    public function callbackFilter(callable $filter): Filter
+    {
+        return Filter::createForCallback($this, $filter);
     }
 
     public function count(): int

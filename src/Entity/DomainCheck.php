@@ -23,7 +23,7 @@ use Redbitcz\SubregApi\Schema\SchemaObject;
  *     - int    premium    0 - domain is not premium, 1 - domain is premium with premium price
  *     - string    currency    Currency of this price
  */
-class DomainCheck
+class DomainCheck implements SchemaEntity
 {
     use SchemaObject;
     use ContextAware;
