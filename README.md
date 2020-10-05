@@ -19,10 +19,10 @@ It requires PHP version 7.3 and supports PHP up to 7.4.
 ## Access level
 
 You can use Package with two ways:
-- **low-level access**: just call commands and get raw response – the Package only handle Request authentication,
+- **low-level access**: just call raw command and get raw response – the Package only handle Request authentication,
     Connection or Server errors and check basic Envelope od Response data. 
 - **context access**: full service access which is allow traversing over data, checks Request and Response data by
-    strict Schema, access to all properties via typed Getters.
+    strict Schema, access to all properties via strict-typed Getters.
 
 For more information see documentation bellow.
 
@@ -35,16 +35,17 @@ For authentication to API use `Credentials` class:
 $credentials = new \Redbitcz\SubregApi\Credentials('microsoft', 'password');
 ```
 
-If you are using [Subreg administrator access](https://subreg.cz/en/settings/admins/) to account, use shortcut:
+If you are using [Subreg administrator access](https://subreg.cz/en/settings/admins/) to account, use '`#`' to join
+ username and administrator name:
 
 ```php
-$credentials = \Redbitcz\SubregApi\Credentials::forAdministrator('microsoft', 'gates', 'password');
+$credentials = new \Redbitcz\SubregApi\Credentials('gates#microsoft', 'password');
 ``` 
 
 For more information about [administrator access](https://subreg.cz/en/settings/admins/) visit
 [Subreg API Login documentation page](https://subreg.cz/manual/?cmd=Login).
 
-### Environment
+### Live / Test Environment
 
 Package is process all requests to Production Environment.
 
@@ -121,23 +122,36 @@ Returns `true` when item exists in Response, `false` otherwise.
 
 Returns one item from Response array. If item doesn't exists, throws `InvalidResponseException`.
 
+### Factory shortcuts
 
+Creating `Client` instance requires pre-create `Credentials` first.
 
- 
 ```php
-require __DIR__ . '/autoload.php';
+$credentials = new \Redbitcz\SubregApi\Credentials('microsoft', 'password');
+$client = new \Redbitcz\SubregApi\Client($credentials);
+```
 
-use Redbitcz\SubregApi;
+It's can be simplified by `Factory` helper:
 
-$context = SubregApi\Factory::createContext('username', 'password', '/temp');
+```php
+$client = \Redbitcz\SubregApi\Factory::createClient('microsoft', 'password');
+```
 
-foreach($context->domain()->list() as $domain) {
-    echo $domain->getName() . PHP_EOL;
+If you are using [administrator access](https://subreg.cz/en/settings/admins/) to account, use:
 
-    foreach($domain->getDnsZone() as $dnsRecord) {
-        if($dnsRecord->isType('SPF')) {
-            $dnsRecord->delete();
-        }           
-    }   
-}
+```php
+$client = \Redbitcz\SubregApi\Factory::createClientForAdministrator('microsoft', 'gates', 'password');
+```
+
+### Example
+```php
+// Create client
+$client = \Redbitcz\SubregApi\Factory::createClient('microsoft', 'password');
+
+// Send request to API
+$response = $client->call('Info_Domain', ['domain' => 'subreg.cz']);
+
+// Print response
+echo "Domain {$response->getItem('name')} is expiring at {$response->getItem('exDate')}.";
+// Domain subreg.cz is expiring at 2023-04-22.
 ```
