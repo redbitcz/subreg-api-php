@@ -1,8 +1,9 @@
 {
-  "name": "redbit/subreg-api-php",
+  "name": "redbitcz/subreg-api-php",
   "description": "Subreg.cz API client for PHP",
   "keywords": ["subreg", "gransy", "api", "client"],
   "license": ["MIT"],
+  "type": "library",
   "authors": [
     {
       "name": "Redbit s.r.o.",
