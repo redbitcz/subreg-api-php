@@ -36,7 +36,7 @@ class Factory
         string $tempDir = null,
         string $url = Credentials::DEFAULT_URL
     ): Client {
-        return self::createClient("{$admin}#{$user}", $password, $tempDir, $url);
+        return self::createClient(Credentials::mergeAdminToLogin($user, $admin), $password, $tempDir, $url);
     }
 
     public static function createContext(
@@ -66,7 +66,7 @@ class Factory
         string $tempDir = null,
         string $url = Credentials::DEFAULT_URL
     ): Context {
-        $client = self::createClientForAdministrator($user, $admin, $password, $tempDir, $url);
+        $client = self::createClient(Credentials::mergeAdminToLogin($user, $admin), $password, $tempDir, $url);
         return new Context($client);
     }
 }

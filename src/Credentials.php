@@ -77,6 +77,11 @@ class Credentials
         string $url = self::DEFAULT_URL,
         string $namespace = self::DEFAULT_NAMESPACE
     ): self {
-        return new self("{$admin}#{$user}", $password, $url, $namespace);
+        return new self(self::mergeAdminToLogin($user, $admin), $password, $url, $namespace);
+    }
+
+    public static function mergeAdminToLogin(string $user, string $admin): string
+    {
+        return "{$admin}#{$user}";
     }
 }
