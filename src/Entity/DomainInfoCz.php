@@ -6,6 +6,7 @@ namespace Redbitcz\SubregApi\Entity;
 
 use Nette\Schema\Elements\Structure;
 use Nette\Schema\Expect;
+use Redbitcz\SubregApi\Collection\DnsZone;
 use Redbitcz\SubregApi\Context\Context;
 use Redbitcz\SubregApi\Context\ContextAware;
 use Redbitcz\SubregApi\Helpers;
@@ -107,6 +108,11 @@ class DomainInfoCz implements SchemaEntity
     public function getName(): string
     {
         return $this->getMandatoryItem('domain');
+    }
+
+    public function dns(): DnsZone
+    {
+        return $this->getMandatoryContext()->dns($this->getName())->list();
     }
 
     public static function fromResponse(Response $response, ?Context $context = null): self
