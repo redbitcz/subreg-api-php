@@ -38,10 +38,35 @@ class Helpers
         return $value;
     }
 
+    /**
+     * Recursive clone any type of stdClass, array and stdClass objects was cloned recursively
+     * @param stdClass|array $object
+     * @return stdClass|array
+     */
+    public static function deepClone($object)
+    {
+        if ($object instanceof stdClass) {
+            $object = clone $object;
+            foreach (get_object_vars($object) as $index => $item) {
+                if (is_array($item) || $item instanceof stdClass) {
+                    $object->$index = self::deepClone($item);
+                }
+            }
+        } elseif (is_array($object)) {
+            foreach ($object as $index => $item) {
+                if (is_array($item) || $item instanceof stdClass) {
+                    $object[$index] = self::deepClone($item);
+                }
+            }
+        }
+
+        return $object;
+    }
+
 
     /**
      * Recursive cast any type to array, array and stdClass objects was casted recursively
-     * @param array|stdClass|mixed $object
+     * @param array|stdClass $object
      * @return array
      */
     public static function toArray($object): array

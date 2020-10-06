@@ -26,7 +26,7 @@ trait SchemaObject
 
     public function getData(): stdClass
     {
-        return $this->data;
+        return Helpers::deepClone($this->data);
     }
 
     public function toArray(): array
