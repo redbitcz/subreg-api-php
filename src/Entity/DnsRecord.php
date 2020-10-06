@@ -9,6 +9,7 @@ use Nette\Schema\Expect;
 use Redbitcz\SubregApi\Context\Context;
 use Redbitcz\SubregApi\Context\ContextAware;
 use Redbitcz\SubregApi\Helpers;
+use Redbitcz\SubregApi\Schema\Schema;
 use Redbitcz\SubregApi\Schema\SchemaObject;
 
 /**
@@ -39,7 +40,7 @@ class DnsRecord implements SchemaEntity
 
     public function defineSchema(): Structure
     {
-        return Expect::structure(
+        return Schema::structure(
             [
                 'id' => Expect::int()->before([Helpers::class, 'soapInt'])->required(),
                 'name' => Expect::string()->required(),

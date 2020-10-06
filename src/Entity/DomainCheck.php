@@ -10,6 +10,7 @@ use Redbitcz\SubregApi\Context\Context;
 use Redbitcz\SubregApi\Context\ContextAware;
 use Redbitcz\SubregApi\Helpers;
 use Redbitcz\SubregApi\Response\Response;
+use Redbitcz\SubregApi\Schema\Schema;
 use Redbitcz\SubregApi\Schema\SchemaObject;
 
 /**
@@ -41,13 +42,13 @@ class DomainCheck implements SchemaEntity
 
     public function defineSchema(): Structure
     {
-        return Expect::structure(
+        return Schema::structure(
             [
                 'name' => Expect::string()->required(),
                 'avail' => Expect::anyOf(self::AVAILABILITY_NOT_AVAILABLE, self::AVAILABILITY_IS_AVAILABLE)
                     ->before([Helpers::class, 'soapInt'])->required(),
                 'existing_claim_id' => Expect::string()->nullable(),
-                'price' => Expect::structure(
+                'price' => Schema::structure(
                     [
                         'amount' => Expect::float()->before([Helpers::class, 'soapFloat'])->required(),
                         'currency' => Expect::string()->required(),

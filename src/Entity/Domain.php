@@ -10,7 +10,7 @@ use Nette\Schema\Expect;
 use Redbitcz\SubregApi\Context\Context;
 use Redbitcz\SubregApi\Context\ContextAware;
 use Redbitcz\SubregApi\Helpers;
-use Redbitcz\SubregApi\Schema;
+use Redbitcz\SubregApi\Schema\Schema;
 use Redbitcz\SubregApi\Schema\SchemaObject;
 
 /**
@@ -36,10 +36,10 @@ class Domain implements SchemaEntity
 
     public function defineSchema(): Structure
     {
-        return Expect::structure(
+        return Schema::structure(
             [
                 'name' => Expect::string()->required(),
-                'expire' => (new Schema\Date())->required(),
+                'expire' => Schema::date()->required(),
                 'autorenew' => Expect::anyOf(
                     self::AUTORENEW_EXPIRE,
                     self::AUTORENEW_AUTORENEW,

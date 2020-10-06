@@ -10,7 +10,7 @@ use Redbitcz\SubregApi\Context\Context;
 use Redbitcz\SubregApi\Context\ContextAware;
 use Redbitcz\SubregApi\Helpers;
 use Redbitcz\SubregApi\Response\Response;
-use Redbitcz\SubregApi\Schema;
+use Redbitcz\SubregApi\Schema\Schema;
 use Redbitcz\SubregApi\Schema\SchemaObject;
 
 /**
@@ -50,14 +50,14 @@ class DomainInfo implements SchemaEntity
 
     public function defineSchema(): Structure
     {
-        $domainContact = Expect::structure(
+        $domainContact = Schema::structure(
             [
                 'subregid' => Expect::string(),
                 'registryid' => Expect::string(),
             ]
         );
 
-        $domainDsdata = Expect::structure(
+        $domainDsdata = Schema::structure(
             [
                 'tag' => Expect::string()->required(),
                 'alg' => Expect::string()->required(),
@@ -65,7 +65,7 @@ class DomainInfo implements SchemaEntity
                 'digest' => Expect::string()->required(),
             ]
         );
-        $domainOptions = Expect::structure(
+        $domainOptions = Schema::structure(
             [
                 'nsset' => Expect::string(),
                 'keyset' => Expect::string(),
@@ -74,10 +74,10 @@ class DomainInfo implements SchemaEntity
                 'quarantined' => Expect::string(),
             ]
         );
-        return Expect::structure(
+        return Schema::structure(
             [
                 'domain' => Expect::string()->required(),
-                'contacts' => Expect::structure(
+                'contacts' => Schema::structure(
                     [
                         'admin' => Expect::listOf($domainContact),
                         'tech' => Expect::listOf($domainContact),
@@ -86,10 +86,10 @@ class DomainInfo implements SchemaEntity
                 ),
                 'hosts' => Expect::listOf(Expect::string()),
                 'registrant' => $domainContact,
-                'exDate' => (new Schema\Date())->required(),
-                'crDate' => (new Schema\Date()),
-                'trDate' => (new Schema\Date()),
-                'upDate' => (new Schema\Date()),
+                'exDate' => Schema::date()->required(),
+                'crDate' => Schema::date(),
+                'trDate' => Schema::date(),
+                'upDate' => Schema::date(),
                 'authid' => Expect::string(),
                 'status' => Expect::listOf(Expect::string()),
                 'rgp' => Expect::listOf(Expect::string()),
