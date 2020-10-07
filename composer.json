@@ -31,10 +31,15 @@
     "symplify/easy-coding-standard": "^8.3.28",
     "nette/tester": "^2.3"
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Redbitcz\\SubregApiTests\\": "tests/"
+    }
+  },
   "scripts": {
     "phpstan": "phpstan analyse src --level 5",
-    "ecs": "ecs check src --set psr12",
-    "ecs-fix": "ecs check src --set psr12 --fix",
+    "ecs": "ecs check src tests --set psr12",
+    "ecs-fix": "ecs check src tests --set psr12 --fix",
     "tests": "tester tests/"
   }
 }
