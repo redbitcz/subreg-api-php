@@ -66,12 +66,12 @@ class Helpers
 
     /**
      * Recursive cast any type to array, array and stdClass objects was casted recursively
-     * @param array|stdClass $object
+     * @param array|stdClass|mixed $var
      * @return array
      */
-    public static function toArray($object): array
+    public static function toArray($var): array
     {
-        $array = (array)$object;
+        $array = (array)$var;
 
         foreach ($array as $index => $item) {
             if (is_array($item) || $item instanceof stdClass) {
