@@ -19,7 +19,7 @@
     "ext-soap": "*",
     "ext-json": "*",
     "psr/log": "^1.1",
-    "nette/schema": "^1.0"
+    "nette/schema": "^1.1"
   },
   "autoload": {
     "psr-4": {
