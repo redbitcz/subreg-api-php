@@ -111,7 +111,7 @@ class Client
 
         if ($response->isErrorStatus()) {
             $errorResponse = ErrorResponse::fromAnyResponse($response);
-            throw ResponseExceptionMapper::createExcetionForResponse($errorResponse);
+            throw ResponseExceptionMapper::createExceptionForResponse($errorResponse);
         }
 
         if ($response->isOkStatus()) {

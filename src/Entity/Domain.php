@@ -31,8 +31,9 @@ class Domain implements SchemaEntity
 
     public function __construct(array $data, ?Context $context = null)
     {
-        $this->setData($data);
         $this->setContext($context);
+
+        $this->setData($data);
     }
 
     public function defineSchema(): Structure
@@ -40,7 +41,7 @@ class Domain implements SchemaEntity
         return Schema::structure(
             [
                 'name' => Expect::string()->required(),
-                'expire' => Schema::date()->required(),
+                'expire' => Schema::date($this->getTimeZone())->required(),
                 'autorenew' => Expect::anyOf(
                     self::AUTORENEW_EXPIRE,
                     self::AUTORENEW_AUTORENEW,
@@ -75,6 +76,18 @@ class Domain implements SchemaEntity
     public function infoCz(): DomainInfoCz
     {
         return $this->getMandatoryContext()->domain()->infoCz($this->getName());
+    }
+
+    /**
+     * Checks domain is component of higher level domain (example.com is component of .com)
+     * @param string $tld
+     * @return bool
+     */
+    public function isDomainOf(string $tld): bool
+    {
+        $domain = $this->getName();
+        $tld = '.' . ltrim($tld, '.');
+        return strripos($domain, $tld) === strlen($domain) - strlen($tld);
     }
 
     public function dns(): DnsZone

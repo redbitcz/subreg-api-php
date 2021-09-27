@@ -16,28 +16,35 @@ class ResponseExceptionMapper
         '500:103' => E\InvalidArgumentException::class,
         '500:104' => E\InvalidCredentialsException::class,
         '500:105' => E\AccessDeniedException::class,
+        '500:106' => E\AccessDeniedException::class,
+        '500:108' => E\CommandRateLimitExceeded::class,
 
         '501:1001' => E\InvalidArgumentException::class,
         '501:1003' => E\InvalidArgumentException::class,
         '501:1004' => E\AccessDeniedException::class,
         '501:1005' => E\InvalidArgumentException::class,
+        '501:1006' => E\InvalidArgumentException::class,
+        '501:1007' => E\NotFoundException::class,
 
         '503:1001' => E\InvalidArgumentException::class,
         '503:1002' => E\InvalidArgumentException::class,
         '503:1003' => E\InvalidArgumentException::class,
         '503:1004' => E\NotFoundException::class,
         '503:1005' => E\InvalidArgumentException::class,
+
+        '507:1005' => E\AccessDeniedException::class,
+
     ];
 
 
-    public static function getExcetionClassForResponse(ErrorResponse $response): string
+    public static function getExceptionClassForResponse(ErrorResponse $response): string
     {
         return self::$map[$response->getCode()] ?? self::DEFAULT_EXCEPTION_CLASS;
     }
 
-    public static function createExcetionForResponse(ErrorResponse $response): E\ResponseErrorException
+    public static function createExceptionForResponse(ErrorResponse $response): E\ResponseErrorException
     {
-        $exceptionClass = self::getExcetionClassForResponse($response);
+        $exceptionClass = self::getExceptionClassForResponse($response);
         return new $exceptionClass($response);
     }
 }

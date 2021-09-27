@@ -43,8 +43,9 @@ class DomainInfoCz implements SchemaEntity
 
     public function __construct(array $data, ?Context $context)
     {
-        $this->setData($data);
         $this->setContext($context);
+
+        $this->setData($data);
     }
 
     public function defineSchema(): Structure
@@ -56,7 +57,7 @@ class DomainInfoCz implements SchemaEntity
             ]
         );
 
-        $domainDsdata = Schema::structure(
+        $domainDsData = Schema::structure(
             [
                 'tag' => Expect::string()->required(),
                 'alg' => Expect::string()->required(),
@@ -68,7 +69,7 @@ class DomainInfoCz implements SchemaEntity
             [
                 'nsset' => Expect::string(),
                 'keyset' => Expect::string(),
-                'dsdata' => Expect::listOf($domainDsdata),
+                'dsdata' => Expect::listOf($domainDsData),
                 'keygroup' => Expect::string(),
                 'quarantined' => Expect::string(),
             ]
@@ -85,10 +86,10 @@ class DomainInfoCz implements SchemaEntity
                 ),
                 'hosts' => Expect::listOf(Expect::string()),
                 'registrant' => $domainContact,
-                'exDate' => Schema::date()->required(),
-                'crDate' => Schema::date(),
-                'trDate' => Schema::date(),
-                'upDate' => Schema::date(),
+                'exDate' => Schema::date($this->getTimeZone())->required(),
+                'crDate' => Schema::date($this->getTimeZone()),
+                'trDate' => Schema::date($this->getTimeZone()),
+                'upDate' => Schema::date($this->getTimeZone()),
                 'status' => Expect::listOf(Expect::string()),
                 'rgp' => Expect::listOf(Expect::string()),
                 'autorenew' => Expect::anyOf(

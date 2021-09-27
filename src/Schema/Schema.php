@@ -9,12 +9,12 @@ use Nette\Schema\Elements\Structure;
 
 class Schema
 {
-    public static function date($format = 'Y-m-d', ?DateTimeZone $timeZone = null): Date
+    public static function date(?DateTimeZone $timeZone = null, $format = 'Y-m-d'): Date
     {
         return new Date($format, $timeZone);
     }
 
-    public static function dateTime($format = 'Y-m-d H:i:s', ?DateTimeZone $timeZone = null): DateTime
+    public static function dateTime(?DateTimeZone $timeZone = null, $format = 'Y-m-d H:i:s'): DateTime
     {
         return new DateTime($format, $timeZone);
     }

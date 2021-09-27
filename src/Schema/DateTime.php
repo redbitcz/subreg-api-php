@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Redbitcz\SubregApi\Schema;
 
 use DateTimeImmutable;
+use DateTimeInterface;
 use DateTimeZone;
 use Nette\Schema\Context;
+use Nette\Schema\Message;
 use Nette\Schema\Schema;
 
 class DateTime implements Schema
@@ -41,23 +43,48 @@ class DateTime implements Schema
         return $this;
     }
 
+    /**
+     * @param DateTimeInterface|string|null $value
+     */
     public function normalize($value, Context $context): ?DateTimeImmutable
     {
-        // Must be string or empty (null / 0 / false /
-        if (is_string($value) === false && empty($value) === false) {
+        // Must be Date, string or empty (null / 0 / false / "")
+        if ($value instanceof DateTimeInterface === false && is_string($value) === false && empty($value) === false) {
             $type = gettype($value);
-            $context->addError("The option %path% expects Date, $type given.");
-            return null;
-        }
-        if ($this->nullable === false && empty($value)) {
-            $context->addError("The option %path% expects not-nullable Date, nothing given.");
+            $context->addError(
+                "The option %path% expects Date, $type given.",
+                Message::TYPE_MISMATCH
+            );
             return null;
         }
 
-        $normalized = DateTimeImmutable::createFromFormat($this->format, $value, $this->timeZone);
-        if ($normalized instanceof DateTimeImmutable === false) {
-            $context->addError("The option %path% expects Date to match pattern '$this->format', '$value' given.");
+        if (empty($value)) {
+            if ($this->nullable === false) {
+                $context->addError(
+                    "The option %path% expects not-nullable Date, empty value given.",
+                    Message::FAILED_ASSERTION
+                );
+            }
+
             return null;
+        }
+
+        // Translate format
+        if (is_string($value)) {
+            $normalized = DateTimeImmutable::createFromFormat($this->format, $value, $this->timeZone);
+
+            if ($normalized instanceof DateTimeImmutable === false) {
+                $context->addError(
+                    "The option %path% expects Date to match pattern '$this->format', '$value' given.",
+                    Message::PATTERN_MISMATCH
+                );
+
+                return null;
+            }
+        } elseif ($value instanceof \DateTime) {
+            $normalized = DateTimeImmutable::createFromMutable($value);
+        } else {
+            $normalized = $value;
         }
 
         return $normalized;
@@ -76,7 +103,7 @@ class DateTime implements Schema
     public function completeDefault(Context $context)
     {
         if ($this->required) {
-            $context->addError('The mandatory option %path% is missing.');
+            $context->addError('The mandatory option %path% is missing.', Message::MISSING_ITEM);
         }
         return null;
     }

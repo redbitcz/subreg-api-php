@@ -12,6 +12,7 @@ use stdClass;
 
 trait SchemaObject
 {
+    // Traits cannot have constants
     private static $STRUCTURE_KEY_DELIMITER = '.';
 
     /** @var stdClass */
@@ -67,8 +68,8 @@ trait SchemaObject
             throw new SchemaItemMissingException(
                 sprintf(
                     "Unable to get '%s' item from scheme because '%s' does not exists",
-                    implode('.', array_merge($path, $keys)),
-                    implode('.', $path)
+                    implode(self::$STRUCTURE_KEY_DELIMITER, array_merge($path, $keys)),
+                    implode(self::$STRUCTURE_KEY_DELIMITER, $path)
                 )
             );
         }
@@ -80,8 +81,8 @@ trait SchemaObject
             throw new SchemaItemMissingException(
                 sprintf(
                     "Unable to get '%s' item from scheme because '%s' is not structure but %s",
-                    implode('.', array_merge($path, $keys)),
-                    implode('.', $path),
+                    implode(self::$STRUCTURE_KEY_DELIMITER, array_merge($path, $keys)),
+                    implode(self::$STRUCTURE_KEY_DELIMITER, $path),
                     gettype($data->$key)
                 )
             );
