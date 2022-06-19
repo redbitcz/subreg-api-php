@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Redbitcz\SubregApi\Context;
 
+use DateTimeZone;
 use Redbitcz\SubregApi\Exception\LogicException;
 
 trait ContextAware
@@ -32,5 +33,10 @@ trait ContextAware
     public function hasContext(): bool
     {
         return $this->context !== null;
+    }
+
+    public function getTimeZone(): ?DateTimeZone
+    {
+        return $this->context !== null ? $this->context->getTimeZone() : null;
     }
 }

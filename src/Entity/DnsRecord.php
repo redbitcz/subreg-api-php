@@ -33,9 +33,10 @@ class DnsRecord implements SchemaEntity
 
     public function __construct(string $domain, array $data, ?Context $context = null)
     {
+        $this->setContext($context);
+
         $this->domain = $domain;
         $this->setData($data);
-        $this->setContext($context);
     }
 
     public function defineSchema(): Structure

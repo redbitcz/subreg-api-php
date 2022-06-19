@@ -61,7 +61,7 @@ class Client
 
     private function getApiToken(): string
     {
-        return $this->tokenCache->load($this->credentials->getIdentityHash(), Closure::fromCallable('self::login'));
+        return $this->tokenCache->load($this->credentials->getIdentityHash(), Closure::fromCallable([$this, 'login']));
     }
 
     protected function reloadApiToken(): string
@@ -111,7 +111,7 @@ class Client
 
         if ($response->isErrorStatus()) {
             $errorResponse = ErrorResponse::fromAnyResponse($response);
-            throw ResponseExceptionMapper::createExcetionForResponse($errorResponse);
+            throw ResponseExceptionMapper::createExceptionForResponse($errorResponse);
         }
 
         if ($response->isOkStatus()) {

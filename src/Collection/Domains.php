@@ -22,8 +22,9 @@ class Domains implements IteratorAggregate, Countable
 
     public function __construct(array $domains, ?Context $context = null)
     {
-        $this->domains = $domains;
         $this->setContext($context);
+
+        $this->domains = $domains;
     }
 
     /**

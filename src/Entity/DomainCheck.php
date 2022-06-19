@@ -36,8 +36,9 @@ class DomainCheck implements SchemaEntity
 
     public function __construct(array $data, ?Context $context)
     {
-        $this->setData($data);
         $this->setContext($context);
+
+        $this->setData($data);
     }
 
     public function defineSchema(): Structure

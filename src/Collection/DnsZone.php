@@ -25,9 +25,10 @@ class DnsZone implements IteratorAggregate, Countable
 
     public function __construct(string $domain, array $records, ?Context $context = null)
     {
+        $this->setContext($context);
+
         $this->domain = $domain;
         $this->records = $records;
-        $this->setContext($context);
     }
 
     /**
