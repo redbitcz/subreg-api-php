@@ -61,7 +61,7 @@ class Client
 
     private function getApiToken(): string
     {
-        return $this->tokenCache->load($this->credentials->getIdentityHash(), Closure::fromCallable('self::login'));
+        return $this->tokenCache->load($this->credentials->getIdentityHash(), Closure::fromCallable([$this, 'login']));
     }
 
     protected function reloadApiToken(): string
