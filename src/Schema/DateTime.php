@@ -49,7 +49,8 @@ class DateTime implements Schema
     public function normalize($value, Context $context): ?DateTimeImmutable
     {
         // Must be Date, string or empty (null / 0 / false / "")
-        if ($value instanceof DateTimeInterface === false && is_string($value) === false && empty($value) === false) {
+        /** @phpstan-ignore-next-line Result of && is always false. */
+        if (($value instanceof DateTimeInterface) === false && is_string($value) === false && empty($value) === false) {
             $type = gettype($value);
             $context->addError(
                 "The option %path% expects Date, $type given.",
